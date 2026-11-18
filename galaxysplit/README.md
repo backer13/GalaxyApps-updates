@@ -8,7 +8,7 @@
 
 Навигация и музыка, карта и камера — удобные сочетания с запуском из пресета.
 
-**[Попробовать интерактивный макет](https://tepl.pro/galaxysplit/)** · **[APK и релизы](https://t.me/GalaxyAppsRU)**
+**[Попробовать интерактивный макет](https://backer13.github.io/GalaxyApps-updates/galaxysplit/)** · **[APK и релизы](https://t.me/GalaxyAppsRU)**
 
 </div>
 
@@ -33,7 +33,7 @@
 
 ## Посмотреть перед установкой
 
-**[Открыть GalaxySplit в браузере →](https://tepl.pro/galaxysplit/)**
+**[Открыть GalaxySplit в браузере →](https://backer13.github.io/GalaxyApps-updates/galaxysplit/)**
 
 Интерактивный макет позволяет попробовать интерфейс и настройки без установки на ГУ. Поведение приложений в нём демонстрационное.
 

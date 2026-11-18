@@ -8,7 +8,7 @@
 
 Ярлыки приложений, папки, автомобильные виджеты и быстрые действия.
 
-**[Попробовать интерактивный макет](https://tepl.pro/galaxybar/)** · **[APK и релизы](https://t.me/GalaxyAppsRU)**
+**[Попробовать интерактивный макет](https://backer13.github.io/GalaxyApps-updates/galaxybar/)** · **[APK и релизы](https://t.me/GalaxyAppsRU)**
 
 </div>
 
@@ -39,7 +39,7 @@
 
 ## Посмотреть перед установкой
 
-**[Открыть GalaxyBar в браузере →](https://tepl.pro/galaxybar/)**
+**[Открыть GalaxyBar в браузере →](https://backer13.github.io/GalaxyApps-updates/galaxybar/)**
 
 В макете можно попробовать настройки, папки и виджеты. Значения тестовые; часть функций может относиться к будущему релизу.
 

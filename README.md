@@ -18,13 +18,13 @@
 <img src="assets/galaxybar.png" alt="GalaxyBar" width="96" height="96">
 <h2>GalaxyBar</h2>
 <p>Ярлыки, папки и данные автомобиля в верхней строке ГУ.</p>
-<p><a href="galaxybar/README.md"><strong>О приложении</strong></a> · <a href="https://tepl.pro/galaxybar/">Интерактивный макет</a></p>
+<p><a href="galaxybar/README.md"><strong>О приложении</strong></a> · <a href="https://backer13.github.io/GalaxyApps-updates/galaxybar/">Интерактивный макет</a></p>
 </td>
 <td align="center" width="50%">
 <img src="assets/galaxysplit.png" alt="GalaxySplit" width="96" height="96">
 <h2>GalaxySplit</h2>
 <p>Два приложения на одном экране. Сохранённые пресеты и удобное управление.</p>
-<p><a href="galaxysplit/README.md"><strong>О приложении</strong></a> · <a href="https://tepl.pro/galaxysplit/">Интерактивный макет</a></p>
+<p><a href="galaxysplit/README.md"><strong>О приложении</strong></a> · <a href="https://backer13.github.io/GalaxyApps-updates/galaxysplit/">Интерактивный макет</a></p>
 </td>
 </tr>
 </table>
@@ -33,8 +33,8 @@
 
 Интерактивные макеты открываются в браузере: можно переключать разделы, открывать окна и пробовать настройки. Показания автомобиля в макетах тестовые.
 
-- **[Открыть GalaxyBar](https://tepl.pro/galaxybar/)**
-- **[Открыть GalaxySplit](https://tepl.pro/galaxysplit/)**
+- **[Открыть GalaxyBar](https://backer13.github.io/GalaxyApps-updates/galaxybar/)**
+- **[Открыть GalaxySplit](https://backer13.github.io/GalaxyApps-updates/galaxysplit/)**
 
 Макеты могут показывать функции, которые ещё готовятся к выпуску.
 
