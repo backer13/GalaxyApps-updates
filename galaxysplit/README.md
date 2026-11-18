@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="../assets/galaxysplit.png" alt="Логотип GalaxySplit" width="112" height="112">
+<img src="../assets/galaxysplit-linked.png" alt="Логотип GalaxySplit" width="112" height="112">
 
 # GalaxySplit
 
