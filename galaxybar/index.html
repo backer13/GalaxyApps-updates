@@ -2479,7 +2479,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   const state = {
     section:0, enabled:true, limit:3,
     experimental:globalThis.openai?.widgetState?.privateContent?.experimental===true,nightOrder:4,
-    nightOptions:{brightness:80,fullscreen:true,hideStatusBar:false,hideGalaxyBar:true,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
+    nightOptions:{brightness:80,horizon:false,fullscreen:true,hideStatusBar:false,hideGalaxyBar:true,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
       ...globalThis.openai?.widgetState?.privateContent?.nightOptions},
     widgetFields:{battery:[true,true,true,false],engine:[true,true,true,false],cabin:[true,true]},
     systemIconCount:Math.max(1,Math.min(5,Number(globalThis.openai?.widgetState?.privateContent?.systemIconCount)||1)),
@@ -3073,6 +3073,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     showDialog(&#x27;Ночной режим&#x27;,&#x27;&lt;div class=&quot;gb-night-settings&quot;&gt;&#x27;+
       &#x27;&lt;label class=&quot;gb-night-brightness&quot;&gt;&lt;span&gt;&lt;span&gt;Яркость ночного режима&lt;/span&gt;&lt;output data-night-brightness-value&gt;&#x27;+options.brightness+&#x27; %&lt;/output&gt;&lt;/span&gt;&#x27;+
       &#x27;&lt;input type=&quot;range&quot; min=&quot;10&quot; max=&quot;100&quot; step=&quot;10&quot; value=&quot;&#x27;+options.brightness+&#x27;&quot; data-night-brightness aria-label=&quot;Яркость ночного режима&quot;&gt;&lt;/label&gt;&#x27;+
+      check(&#x27;horizon&#x27;,&#x27;Фон «Горизонт»&#x27;)+
       &#x27;&lt;h3&gt;Панели в ночном режиме&lt;/h3&gt;&#x27;+check(&#x27;fullscreen&#x27;,&#x27;Полноэкранный режим&#x27;)+
       check(&#x27;hideStatusBar&#x27;,&#x27;Скрывать верхнюю панель&#x27;)+
       &#x27;&lt;p&gt;В этом режиме нижняя штатная панель остаётся видимой.&lt;/p&gt;&#x27;+
@@ -3760,7 +3761,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
  const canvas=root.querySelector(&#x27;canvas&#x27;),ctx=canvas.getContext(&#x27;2d&#x27;);
  const saved=globalThis.openai?.widgetState?.privateContent?.nightConcept;
  const state={speed:72,rpm:1540,power:18.6,brightness:80,live:true,scenario:&#x27;Авто&#x27;,powerAvailable:true,...saved};
- let options={brightness:80,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
+ let options={brightness:80,horizon:false,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
    ...globalThis.openai?.widgetState?.privateContent?.nightOptions};
  let layoutKey=&#x27;&#x27;;
  function layout(){
@@ -3817,12 +3818,38 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
    ctx.fillStyle=glow;ctx.beginPath();ctx.arc(ex,ey,48,0,Math.PI*2);ctx.fill();
   }
  }
+ let horizonCanvas;
+ function horizonBackground(){
+  if(horizonCanvas)return horizonCanvas;
+  horizonCanvas=document.createElement(&#x27;canvas&#x27;);horizonCanvas.width=1280;horizonCanvas.height=720;
+  const bg=horizonCanvas.getContext(&#x27;2d&#x27;);
+  const sky=bg.createLinearGradient(0,0,0,720);
+  sky.addColorStop(0,&#x27;#080c14&#x27;);sky.addColorStop(.24,&#x27;#111d2d&#x27;);
+  sky.addColorStop(.375,&#x27;#1e3346&#x27;);sky.addColorStop(.39,&#x27;#142637&#x27;);
+  sky.addColorStop(.7,&#x27;#0a131f&#x27;);sky.addColorStop(1,&#x27;#07060a&#x27;);
+  bg.fillStyle=sky;bg.fillRect(0,0,1280,720);
+  const glow=(x,y,rx,ry,stops)=&gt;{
+   bg.save();bg.translate(x,y);bg.scale(rx,ry);
+   const light=bg.createRadialGradient(0,0,0,0,0,1);
+   for(const [offset,colour] of stops)light.addColorStop(offset,colour);
+   bg.fillStyle=light;bg.fillRect(-1,-1,2,2);bg.restore();
+  };
+  glow(640,255,790,160,[[0,&#x27;#82b5d136&#x27;],[.35,&#x27;#618fb12a&#x27;],[1,&#x27;#3e698d00&#x27;]]);
+  glow(640,294,610,205,[[0,&#x27;#3d779f1f&#x27;],[.4,&#x27;#235a7d12&#x27;],[1,&#x27;#10233400&#x27;]]);
+  glow(640,270,610,36,[[0,&#x27;#b3e3f359&#x27;],[.25,&#x27;#8ec7e12c&#x27;],[.7,&#x27;#527e9d0d&#x27;],[1,&#x27;#527e9d00&#x27;]]);
+  const edge=bg.createLinearGradient(0,0,1280,0);
+  for(const [offset,alpha] of [[0,0],[.16,.04],[.36,.25],[.5,.48],[.64,.25],[.84,.04],[1,0]])
+   edge.addColorStop(offset,&#x27;rgba(171,218,239,&#x27;+alpha+&#x27;)&#x27;);
+  bg.strokeStyle=edge;bg.lineWidth=1;bg.beginPath();bg.moveTo(0,270.5);bg.lineTo(1280,270.5);bg.stroke();
+  return horizonCanvas;
+ }
  function draw(speed,right){
   const box=canvas.getBoundingClientRect(),ratio=devicePixelRatio||1;
   const w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);
   if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
   ctx.setTransform(canvas.width/1280,0,0,canvas.height/720,0,0);ctx.clearRect(0,0,1280,720);
   ctx.fillStyle=&#x27;#07060a&#x27;;ctx.fillRect(0,0,1280,720);
+  if(options.horizon===true)ctx.drawImage(horizonBackground(),0,0);
   const panel=ctx.createLinearGradient(0,22,0,601);panel.addColorStop(0,&#x27;#29262a&#x27;);panel.addColorStop(.5,&#x27;#1b191f&#x27;);panel.addColorStop(1,&#x27;#29252a&#x27;);
   ctx.beginPath();ctx.roundRect(24,28,1232,574,[85,145,65,65]);ctx.strokeStyle=panel;ctx.lineWidth=2;ctx.stroke();
   if(options.speed)dial(options.engine?330:640,speed,180,false);
@@ -3854,6 +3881,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   const value=right.value==null?&#x27;—&#x27;:String(Math.sign(right.value)*Math.round(Math.abs(right.value)));
   const brightness=Math.max(10,Math.min(100,Math.round((Number(options.brightness)||80)/10)*10));
   root.style.setProperty(&#x27;--nc-brightness&#x27;,String(brightness/100));
+  root.dataset.horizon=String(options.horizon===true);
   root.querySelector(&#x27;[data-speed]&#x27;).textContent=speed;root.querySelector(&#x27;[data-nc-reading]&#x27;).textContent=value;
   root.querySelector(&#x27;[data-right-label]&#x27;).textContent=right.label;root.querySelector(&#x27;[data-right-unit]&#x27;).textContent=right.unit;
   root.querySelector(&#x27;.nc-power-notice&#x27;).hidden=!options.engine||right.mode!==&#x27;power&#x27;||right.value!==null;
