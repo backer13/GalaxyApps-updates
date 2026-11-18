@@ -2329,6 +2329,10 @@ html&gt;body{padding:0}&lt;/style&gt;
 #galaxybar-app-demo .gb-diagnostics {margin:10px 0 16px}
 #galaxybar-app-demo:is([data-section=&quot;7&quot;],[data-section=&quot;8&quot;]) .gb-test-drive {display:none}
 #galaxybar-app-demo .gb-diagnostics p {margin:0 0 6px;overflow-wrap:anywhere}
+#galaxybar-app-demo .gb-diagnostics .gb-diagnostic-status {background:var(--gb-card);border-left:3px solid var(--gb-accent);border-radius:6px;padding:9px 12px;margin-bottom:10px;line-height:1.35}
+#galaxybar-app-demo .gb-diagnostic-status small {display:block;margin-bottom:3px}
+#galaxybar-app-demo .gb-diagnostic-label {color:var(--gb-muted)}
+#galaxybar-app-demo .gb-diagnostics h3 {margin-top:12px}
 #galaxybar-app-demo .gb-diagnostics .gb-actions {margin-top:10px}
 #galaxybar-app-demo .gb-diagnostics-report {width:100%;min-height:180px;box-sizing:border-box;padding:10px;color:var(--gb-text);background:var(--gb-bg);border:1px solid var(--gb-line);border-radius:8px;resize:vertical;font:inherit}
 #galaxybar-app-demo .gb-remove-spacer {flex:0 0 28px}
@@ -2805,23 +2809,30 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   }
   const autoShiftServiceStatus = &#x27;не подключена&#x27;;
   const secureSettingsStatus = &#x27;не выдано&#x27;;
-  const diagnosticRows = [
-    [&#x27;Flyme Auto&#x27;,&#x27;1.10.0-ota4 (приложение «Автомобиль»)&#x27;],
-    [&#x27;Сборка ГУ&#x27;,&#x27;FlymeAuto-1.10.0-ota4&#x27;],
-    [&#x27;Android&#x27;,&#x27;11 (API 30)&#x27;],
+  const panelStatus = &#x27;Прошивка не выдала разрешения для верхней панели&#x27;;
+  const panelDiagnostics = [
+    [&#x27;Строка включена&#x27;,&#x27;да&#x27;],
+    [&#x27;Подписи GalaxyBar и Android&#x27;,&#x27;различаются&#x27;],
     [&#x27;INTERNAL_SYSTEM_WINDOW&#x27;,&#x27;не выдано&#x27;],
-    [&#x27;STATUS_BAR_SERVICE&#x27;,&#x27;не выдано&#x27;],
-    [&#x27;CAR_ENERGY&#x27;,&#x27;выдано&#x27;],
-    [&#x27;CAR_SPEED&#x27;,&#x27;не выдано&#x27;]
+    [&#x27;STATUS_BAR_SERVICE&#x27;,&#x27;не выдано&#x27;]
   ];
-  const autoShiftDiagnosticRows = [
+  const autoShiftDiagnostics = [
     [&#x27;Служба автосдвига&#x27;,autoShiftServiceStatus],
     [&#x27;WRITE_SECURE_SETTINGS&#x27;,secureSettingsStatus]
   ];
+  const firmwareDiagnostics = [
+    [&#x27;GalaxyBar&#x27;,&#x27;1.6&#x27;],
+    [&#x27;Flyme Auto&#x27;,&#x27;1.10.0-ota4 (приложение «Автомобиль»)&#x27;],
+    [&#x27;Сборка ГУ&#x27;,&#x27;FlymeAuto-1.10.0-ota4&#x27;],
+    [&#x27;Android&#x27;,&#x27;11 (API 30)&#x27;],
+    [&#x27;CAR_ENERGY&#x27;,&#x27;выдано&#x27;],
+    [&#x27;CAR_SPEED&#x27;,&#x27;не выдано&#x27;]
+  ];
   const diagnosticReport = () =&gt; &#x27;GalaxyBar 1.6 · Диагностика\nДемонстрационные данные\n\n&#x27;+
-    diagnosticRows.map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+
-    &#x27;\n\nSystemUI · 11\nПлагин Flyme SystemUI · 1.10.0-ota4\nПодписи GalaxyBar и Android · различаются\n&#x27;+
-    &#x27;Строка включена · да\nСостояние строки · Прошивка не выдала разрешения для верхней панели\n&#x27;+
+    firmwareDiagnostics.map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+
+    &#x27;\n\nSystemUI · 11\nПлагин Flyme SystemUI · 1.10.0-ota4\n&#x27;+
+    panelDiagnostics.map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+&#x27;\n&#x27;+
+    &#x27;Состояние строки · &#x27;+panelStatus+&#x27;\n&#x27;+
     &#x27;Служба автосдвига и скриншотов · &#x27;+autoShiftServiceStatus+&#x27;\n\nРазрешения функций\n&#x27;+
     &#x27;android.car.permission.CAR_MILEAGE · выдано\nandroid.car.permission.CONTROL_CAR_CLIMATE · не выдано\n&#x27;+
     &#x27;android.permission.REAL_GET_TASKS · не выдано\nandroid.permission.REMOVE_TASKS · не выдано\n&#x27;+
@@ -2831,8 +2842,11 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     &#x27;Уровень топлива в литрах (FUEL_LEVEL) · нет данных\n&#x27;+
     &#x27;Уровень топлива в процентах · данные получены\nПодогрев водителя · чтение выключено\n&#x27;;
   function diagnostics() {
+    const rows = entries =&gt; entries.map(([name,value])=&gt;
+      &#x27;&lt;p&gt;&lt;span class=&quot;gb-diagnostic-label&quot;&gt;&#x27;+escape(name)+&#x27;&lt;/span&gt; · &#x27;+escape(value)+&#x27;&lt;/p&gt;&#x27;).join(&#x27;&#x27;);
     return &#x27;&lt;section class=&quot;gb-diagnostics&quot; aria-label=&quot;Состояние ГУ и разрешения&quot;&gt;&#x27;+
-      [...diagnosticRows,...autoShiftDiagnosticRows].map(row=&gt;&#x27;&lt;p&gt;&#x27;+escape(row.join(&#x27; · &#x27;))+&#x27;&lt;/p&gt;&#x27;).join(&#x27;&#x27;)+
+      &#x27;&lt;p class=&quot;gb-diagnostic-status&quot;&gt;&lt;small&gt;Состояние строки&lt;/small&gt;&#x27;+escape(panelStatus)+&#x27;&lt;/p&gt;&#x27;+
+      rows(panelDiagnostics)+rows(autoShiftDiagnostics)+&#x27;&lt;h3&gt;ГУ и приложение&lt;/h3&gt;&#x27;+rows(firmwareDiagnostics)+
       &#x27;&lt;div class=&quot;gb-actions&quot;&gt;&#x27;+tile(&#x27;Сохранить TXT&#x27;,&#x27;saveDiagnostics&#x27;,glyph(&#x27;download&#x27;,&#x27;⇩&#x27;))+
       tile(&#x27;Поделиться&#x27;,&#x27;shareDiagnostics&#x27;,glyph(&#x27;message-square&#x27;,&#x27;▢&#x27;))+&#x27;&lt;/div&gt;&lt;/section&gt;&#x27;;
   }
