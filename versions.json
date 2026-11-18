@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "apps": {
+    "ru.galaxybar": {
+      "name": "GalaxyBar",
+      "published": false,
+      "versionCode": 0,
+      "versionName": "",
+      "changes": [],
+      "telegramUrl": "https://t.me/GalaxyAppsRU",
+      "storeUrl": null
+    },
+    "ru.galaxysplit": {
+      "name": "GalaxySplit",
+      "published": false,
+      "versionCode": 0,
+      "versionName": "",
+      "changes": [],
+      "telegramUrl": "https://t.me/GalaxyAppsRU",
+      "storeUrl": null
+    }
+  }
+}

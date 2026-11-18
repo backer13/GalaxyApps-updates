@@ -1,0 +1,6 @@
+*.apk
+*.zip
+*.pk8
+*.jks
+*.keystore
+.env*
