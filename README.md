@@ -1,19 +1,56 @@
-# GalaxyApps — сведения об обновлениях
+<div align="center">
 
-Публичный канал данных для уведомлений об обновлениях GalaxyBar и GalaxySplit.
-Содержит только номера опубликованных версий, списки изменений и ссылки на Telegram / SnickPro Store.
-Исходного кода приложений и APK здесь нет.
+# GalaxyApps
 
-## versions.json
+### GalaxyBar · GalaxySplit
 
-- `schemaVersion` — версия формата.
-- `apps` — данные приложений по Android package name.
-- `published: false` — запись ещё не объявляет доступное обновление.
-- `versionCode` — целочисленный Android versionCode, сравниваемый с установленной сборкой.
-- `versionName` — название версии для пользователя.
-- `changes` — список основных изменений.
-- `telegramUrl` — ссылка на релиз в Telegram.
-- `storeUrl` — ссылка на SnickPro Store, если известна.
+Приложения для удобной работы с ГУ.
 
-Добавляйте актуальный номер версии и переключайте `published` в `true` только после публикации релиза.
-Приложение лишь уведомляет пользователя и открывает выбранный источник обновления.
+[Релизы и обсуждение в Telegram](https://t.me/GalaxyAppsRU) · [Связаться с автором](https://t.me/Den_Topchiev)
+
+</div>
+
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="assets/galaxybar.png" alt="GalaxyBar" width="96" height="96">
+<h2>GalaxyBar</h2>
+<p>Ярлыки, папки и данные автомобиля в верхней строке ГУ.</p>
+<p><a href="galaxybar/README.md"><strong>О приложении</strong></a> · <a href="https://tepl.pro/galaxybar/">Интерактивный макет</a></p>
+</td>
+<td align="center" width="50%">
+<img src="assets/galaxysplit.png" alt="GalaxySplit" width="96" height="96">
+<h2>GalaxySplit</h2>
+<p>Два приложения на одном экране. Сохранённые пресеты и удобное управление.</p>
+<p><a href="galaxysplit/README.md"><strong>О приложении</strong></a> · <a href="https://tepl.pro/galaxysplit/">Интерактивный макет</a></p>
+</td>
+</tr>
+</table>
+
+## Попробовать интерфейс
+
+Интерактивные макеты открываются в браузере: можно переключать разделы, открывать окна и пробовать настройки. Показания автомобиля в макетах тестовые.
+
+- **[Открыть GalaxyBar](https://tepl.pro/galaxybar/)**
+- **[Открыть GalaxySplit](https://tepl.pro/galaxysplit/)**
+
+Макеты могут показывать функции, которые ещё готовятся к выпуску.
+
+## APK и новые версии
+
+Публичные релизы, APK и основные изменения публикуются в **[Telegram — @GalaxyAppsRU](https://t.me/GalaxyAppsRU)**. Приложения также можно найти в SnickPro Store.
+
+Оба приложения бесплатные. Пожертвования добровольные и не влияют на доступ к функциям. Идеи и обратная связь приветствуются.
+
+---
+
+<details>
+<summary>Сведения о версиях для приложений</summary>
+
+В этом репозитории находится [versions.json](versions.json) — публичные данные для проверки обновлений. Исходники и APK хранятся отдельно, в закрытом репозитории.
+
+В файл попадают только опубликованные релизы. Промежуточные сборки не объявляются пользователям как обновления.
+
+Описание формата — [version-feed.md](docs/version-feed.md).
+
+</details>
