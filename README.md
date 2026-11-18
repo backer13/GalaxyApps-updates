@@ -15,7 +15,7 @@
 <table>
 <tr>
 <td align="center" width="50%">
-<img src="assets/galaxybar.png" alt="GalaxyBar" width="96" height="96">
+<img src="assets/galaxybar-dots.png" alt="GalaxyBar" width="96" height="96">
 <h2>GalaxyBar</h2>
 <p>Ярлыки, папки и данные автомобиля в верхней строке ГУ.</p>
 <p><a href="galaxybar/README.md"><strong>О приложении</strong></a> · <a href="https://backer13.github.io/GalaxyApps-updates/galaxybar/">Интерактивный макет</a></p>

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="../assets/galaxybar.png" alt="Логотип GalaxyBar" width="112" height="112">
+<img src="../assets/galaxybar-dots.png" alt="Логотип GalaxyBar" width="112" height="112">
 
 # GalaxyBar
 
