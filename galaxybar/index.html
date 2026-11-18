@@ -2145,12 +2145,18 @@ html&gt;body{padding:0}&lt;/style&gt;
 #galaxybar-app-demo .gb-pop-items {display:grid;gap:5px}
 #galaxybar-app-demo .gb-grid .gb-pop-items {grid-template-columns:repeat(var(--folder-columns,3),minmax(0,1fr))}
 #galaxybar-app-demo .gb-grid .gb-pop-items button {min-height:var(--folder-tile-height,64px)}
-#galaxybar-app-demo .gb-grid .gb-pop-items button &gt; :is(.gb-icon,.gb-symbol,.gb-preset-icon) {width:var(--folder-icon-size,27px);height:var(--folder-icon-size,27px);min-width:var(--folder-icon-size,27px);flex:none;font-size:var(--folder-icon-size,27px)}
+#galaxybar-app-demo .gb-grid .gb-pop-items button &gt; :is(.gb-icon,.gb-symbol,.gb-seat-icon,.gb-preset-icon) {width:var(--folder-icon-size,27px);height:var(--folder-icon-size,27px);min-width:var(--folder-icon-size,27px);flex:none;font-size:var(--folder-icon-size,27px)}
 #galaxybar-app-demo .gb-grid .gb-pop-items .gb-symbol svg {width:100%;height:100%}
 #galaxybar-app-demo :is(.gb-grid,.gb-draft-grid) .gb-preset-icon &gt; .gb-icon {width:70.83%;height:70.83%}
 #galaxybar-app-demo .gb-pop-items button {display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--gb-tile);border-radius:7px;min-height:34px;text-align:left;overflow-wrap:anywhere}
 #galaxybar-app-demo .gb-grid .gb-pop-items button {flex-direction:column;justify-content:center;text-align:center;min-height:var(--folder-tile-height,64px);height:var(--folder-tile-height,64px);font-size:12px;padding:5px}
 #galaxybar-app-demo .gb-grid .gb-folder-caption {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#galaxybar-app-demo .gb-folder-copy {min-width:0;flex:1}
+#galaxybar-app-demo .gb-folder-caption {display:block;line-height:1.25}
+#galaxybar-app-demo .gb-folder-state {display:block;color:var(--gb-muted);font-size:11px;line-height:14px;min-height:14px;margin-top:2px}
+#galaxybar-app-demo .gb-grid .gb-folder-copy {flex:none;width:100%}
+#galaxybar-app-demo .gb-grid .gb-pop-items &gt; button.gb-function-tile {height:calc(var(--folder-tile-height,64px) + 30px);min-height:calc(var(--folder-tile-height,64px) + 30px)}
+#galaxybar-app-demo .gb-grid .gb-function-tile .gb-folder-caption {min-height:28px;line-height:14px;flex:none}
 #galaxybar-app-demo .gb-grid .gb-icon {width:29px;height:29px}
 #galaxybar-app-demo .gb-dialog {color:var(--gb-text);background:var(--gb-card);border:0;border-radius:14px;padding:17px;width:min(460px,calc(100% - 26px));max-height:85vh;box-shadow:0 14px 40px #0006}
 #galaxybar-app-demo .gb-dialog[data-folder-editor] {width:min(var(--folder-editor-width,460px),calc(100% - 26px))}
@@ -2229,7 +2235,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 #galaxybar-app-demo .gb-actions.gb-two {display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 #galaxybar-app-demo .gb-draft-grid {display:grid;grid-template-columns:repeat(var(--folder-columns,3),minmax(0,1fr));width:min(100%,var(--folder-grid-width,352px));gap:8px;margin:8px auto 0}
 #galaxybar-app-demo .gb-draft-grid .gb-draft-item {height:var(--folder-tile-height,96px);min-height:var(--folder-tile-height,96px);min-width:0;padding:8px 5px;overflow:hidden}
-#galaxybar-app-demo .gb-draft-item &gt; :is(.gb-icon,.gb-symbol,.gb-preset-icon) {width:var(--folder-icon-size,40px);height:var(--folder-icon-size,40px);min-width:var(--folder-icon-size,40px);font-size:var(--folder-icon-size,40px)}
+#galaxybar-app-demo .gb-draft-item &gt; :is(.gb-icon,.gb-symbol,.gb-seat-icon,.gb-preset-icon) {width:var(--folder-icon-size,40px);height:var(--folder-icon-size,40px);min-width:var(--folder-icon-size,40px);font-size:var(--folder-icon-size,40px)}
 #galaxybar-app-demo .gb-draft-grid .gb-symbol svg {width:100%;height:100%}
 #galaxybar-app-demo .gb-draft-grid .gb-draft-item &gt; .gb-folder-caption {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;max-width:100%;line-height:14px;max-height:28px;overflow:hidden;text-overflow:ellipsis}
 #galaxybar-app-demo .gb-draft-item {position:relative;display:grid;place-content:center;justify-items:center;gap:5px;min-height:94px;padding:23px 5px 8px;background:var(--gb-tile);border-radius:9px;text-align:center;font-size:12px;touch-action:none;cursor:grab;user-select:none}
@@ -2341,7 +2347,9 @@ html&gt;body{padding:0}&lt;/style&gt;
 #galaxybar-app-demo .gb-test-actions button:last-child {background:var(--gb-blue);color:white}
 #galaxybar-app-demo .gb-seat-order {padding-bottom:7px;margin-bottom:5px;border-bottom:1px solid var(--gb-line)}
 #galaxybar-app-demo .gb-seat-shortcut {position:relative}
-#galaxybar-app-demo .gb-seat-badge {position:absolute;right:0;bottom:0;min-width:12px;padding:1px 3px;border-radius:7px;background:var(--gb-blue);color:white;font-size:10px}
+#galaxybar-app-demo .gb-seat-icon {width:24px;height:24px;object-fit:contain;flex:none;border-radius:0;filter:none}
+#galaxybar-app-demo .gb-shortcuts .gb-seat-icon {width:var(--gb-icon-height);height:var(--gb-icon-height)}
+#galaxybar-app-demo .gb-shortcuts .gb-rear-icon {width:calc(var(--gb-icon-height) * 1.5);height:var(--gb-icon-height)}
 html[data-visualize-standalone]:has(#galaxybar-app-demo) &gt; body {margin:0;padding:0;overflow:hidden}
 html[data-visualize-standalone] #galaxybar-app-demo {display:grid;grid-template-rows:auto minmax(0,1fr) auto;block-size:100dvh;border-radius:0}
 html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:auto;min-block-size:0}
@@ -2469,7 +2477,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     massage2:&#x27;Массаж пассажира&#x27;,glass:&#x27;Обогрев заднего стекла и зеркал&#x27;,sounds:&#x27;Внешние звуки&#x27;,night:&#x27;Ночной режим&#x27;,battery:&#x27;Виджет батареи&#x27;,engine:&#x27;Виджет ДВС&#x27;,cabin:&#x27;Виджет салона&#x27;,recent:&#x27;Последние приложения&#x27;};
   const appearance = {left:220,center:36,height:44,round:2,style:0,reserve:false,hide:true};
   const state = {
-    section:5, enabled:true, limit:3,
+    section:0, enabled:true, limit:3,
     experimental:globalThis.openai?.widgetState?.privateContent?.experimental===true,nightOrder:4,
     nightOptions:{brightness:80,fullscreen:true,hideStatusBar:false,hideGalaxyBar:true,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
       ...globalThis.openai?.widgetState?.privateContent?.nightOptions},
@@ -2484,8 +2492,8 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     engineHideStopped:false, engineFill:&#x27;fuel&#x27;, seatHighestFirst:false,
     ...appearance, autoShift:true, theme:2, follow:true, scale:2, day:&#x27;06:00&#x27;, night:&#x27;18:00&#x27;,
     notification:true, optimize:true, hideSystem:true, pinned:[&#x27;split&#x27;,&#x27;sound&#x27;,&#x27;music&#x27;],
-    vehicle:[], excluded:[], splitPresets:[], hidden:[&#x27;shot&#x27;,&#x27;recent&#x27;,&#x27;night&#x27;], order:[&#x27;tasks&#x27;,&#x27;battery&#x27;,&#x27;engine&#x27;,&#x27;cabin&#x27;,&#x27;night&#x27;,&#x27;folder-1&#x27;,&#x27;split&#x27;,&#x27;sound&#x27;,&#x27;music&#x27;,&#x27;shot&#x27;,&#x27;recent&#x27;],
-    folders:[{id:1,name:&#x27;В дороге&#x27;,icon:0,mode:0,visible:true,items:[&#x27;nav&#x27;,&#x27;music&#x27;,&#x27;heat&#x27;,&#x27;recent&#x27;]}],
+    vehicle:[], excluded:[], splitPresets:[], hidden:[&#x27;shot&#x27;,&#x27;recent&#x27;,&#x27;split&#x27;,&#x27;sound&#x27;], order:[&#x27;tasks&#x27;,&#x27;battery&#x27;,&#x27;engine&#x27;,&#x27;cabin&#x27;,&#x27;night&#x27;,&#x27;folder-1&#x27;,&#x27;split&#x27;,&#x27;sound&#x27;,&#x27;music&#x27;,&#x27;shot&#x27;,&#x27;recent&#x27;],
+    folders:[{id:1,name:&#x27;В дороге&#x27;,icon:0,mode:1,columns:2,tileSize:1,visible:true,items:[...seatKeys,&#x27;glass&#x27;,&#x27;sounds&#x27;]}],
     backups:[{name:&#x27;GalaxyBar-2026-11-14.json&#x27;,settings:null}]
   };
   function restoreWidgetFields(stored) {
@@ -2546,8 +2554,65 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   const sectionScroll = new Map();
   const escape = value =&gt; String(value).replace(/[&amp;&lt;&gt;&quot;&#x27;]/g, c =&gt; ({&#x27;&amp;&#x27;:&#x27;&amp;amp;&#x27;,&#x27;&lt;&#x27;:&#x27;&amp;lt;&#x27;,&#x27;&gt;&#x27;:&#x27;&amp;gt;&#x27;,&#x27;&quot;&#x27;:&#x27;&amp;quot;&#x27;,&quot;&#x27;&quot;:&#x27;&amp;#39;&#x27;}[c]));
   const glyph = (name, fallback) =&gt; &#x27;&lt;span class=&quot;gb-symbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;&#x27;+name+&#x27;&quot;&gt;&lt;/i&gt;&lt;span&gt;&#x27;+fallback+&#x27;&lt;/span&gt;&lt;/span&gt;&#x27;;
+  // Reuse the exact Canvas geometry, side mirroring and level colours from SeatIcon.java.
+  const nativeIconCache = new Map();
+  const nativeLevel = key =&gt; key===&#x27;glass&#x27; ? Number(demo.rearHeat) : seatLevels[key]||0;
+  const nativeStateLabel = key =&gt; key===&#x27;glass&#x27; ? (demo.rearHeat?&#x27;Вкл&#x27;:&#x27;Выкл&#x27;)
+    : seatKeys.includes(key) ? (nativeLevel(key)?&#x27;Уровень &#x27;+nativeLevel(key):&#x27;Выкл&#x27;) : &#x27;&#x27;;
+  function nativeIconData(key) {
+    const level=nativeLevel(key), foreground=getComputedStyle(root).getPropertyValue(&#x27;--gb-text&#x27;).trim()||&#x27;#e8eff6&#x27;;
+    const cacheKey=key+&#x27;|&#x27;+level+&#x27;|&#x27;+foreground;
+    if(nativeIconCache.has(cacheKey))return nativeIconCache.get(cacheKey);
+    const canvas=document.createElement(&#x27;canvas&#x27;);
+    canvas.width=key===&#x27;glass&#x27;?160:152;canvas.height=key===&#x27;glass&#x27;?96:152;
+    const ctx=canvas.getContext(&#x27;2d&#x27;);
+    ctx.lineCap=&#x27;round&#x27;;ctx.lineJoin=&#x27;round&#x27;;
+    if(key===&#x27;glass&#x27;) {
+      // ic_rear_heat.xml, kept at its original 40:24 aspect ratio.
+      ctx.scale(4,4);ctx.translate(0,-8);ctx.lineWidth=1.8;
+      ctx.strokeStyle=level?&#x27;#ffae00&#x27;:foreground;
+      ctx.stroke(new Path2D(&#x27;M3,12H23V24H3Z M8,29c3,-5 -2,-6 0,-10 M13,29c3,-5 -2,-6 0,-10 M18,29c3,-5 -2,-6 0,-10 M6,20l2,-3 2,3 M11,20l2,-3 2,3 M16,20l2,-3 2,3 M26,21q0,-2 2,-2h7q2,0 2,2v6H26Z M29,29q1,-2 0,-4 M32,29q1,-2 0,-4 M35,29q1,-2 0,-4 M37,27l2,2&#x27;));
+    } else {
+      ctx.translate(76,76);ctx.scale(key.endsWith(&#x27;2&#x27;)?-4:4,4);ctx.translate(-17,-16);
+      ctx.lineWidth=2.5;ctx.strokeStyle=foreground;
+      ctx.beginPath();ctx.moveTo(3,26);ctx.bezierCurveTo(7,22,16,23,22,26);
+      ctx.quadraticCurveTo(25,28,25,30);ctx.lineTo(5,30);ctx.quadraticCurveTo(3,30,3,26);ctx.closePath();ctx.stroke();
+      ctx.beginPath();ctx.moveTo(22,22);ctx.bezierCurveTo(26,18,29,11,30,4);
+      ctx.quadraticCurveTo(34,6,32,12);ctx.bezierCurveTo(31,17,29,21,26,24);ctx.stroke();
+      const accent=key.startsWith(&#x27;vent&#x27;)?&#x27;#0088ff&#x27;:key.startsWith(&#x27;massage&#x27;)?&#x27;#a946e5&#x27;:&#x27;#ffae00&#x27;;
+      for(let mark=0;mark&lt;3;mark++) {
+        ctx.save();ctx.globalAlpha=mark&lt;level?1:.48;
+        ctx.fillStyle=ctx.strokeStyle=mark&lt;level?accent:foreground;
+        ctx.beginPath();
+        if(key.startsWith(&#x27;vent&#x27;)) {
+          ctx.translate(10,10);ctx.rotate(mark*2*Math.PI/3);ctx.translate(-10,-10);
+          ctx.moveTo(10,10);ctx.bezierCurveTo(6,7,6,2,8,1);
+          ctx.bezierCurveTo(11,0,15,1,16,2);ctx.bezierCurveTo(13,4,12,7,12,10);ctx.closePath();ctx.fill();
+        } else if(key.startsWith(&#x27;massage&#x27;)) {
+          ctx.translate(0,(2-mark)*6);ctx.moveTo(2,3);
+          ctx.bezierCurveTo(5,0,6,7,9,4);ctx.bezierCurveTo(12,1,13,6,16,3);ctx.stroke();
+        } else {
+          ctx.translate((2-mark)*6,0);ctx.moveTo(4,17);ctx.bezierCurveTo(0,11,9,8,5,2);ctx.stroke();
+        }
+        ctx.restore();
+      }
+    }
+    const data=canvas.toDataURL(&#x27;image/png&#x27;);nativeIconCache.set(cacheKey,data);return data;
+  }
+  const nativeFunctionIcon = key =&gt; &#x27;&lt;img class=&quot;gb-seat-icon&#x27;+(key===&#x27;glass&#x27;?&#x27; gb-rear-icon&#x27;:&#x27;&#x27;)+
+    &#x27;&quot; data-native-key=&quot;&#x27;+key+&#x27;&quot; data-native-level=&quot;&#x27;+nativeLevel(key)+&#x27;&quot; alt=&quot;&quot; src=&quot;&#x27;+nativeIconData(key)+&#x27;&quot;&gt;&#x27;;
+  function updateNativeFunction(key) {
+    root.querySelectorAll(&#x27;[data-native-key=&quot;&#x27;+key+&#x27;&quot;]&#x27;).forEach(image=&gt;{
+      image.src=nativeIconData(key);image.dataset.nativeLevel=nativeLevel(key);
+    });
+    root.querySelectorAll(&#x27;[data-action=&quot;launch:&#x27;+key+&#x27;&quot;]&#x27;).forEach(button=&gt;{
+      button.setAttribute(&#x27;aria-description&#x27;,nativeStateLabel(key));
+      const caption=button.querySelector(&#x27;[data-native-state]&#x27;);if(caption)caption.textContent=nativeStateLabel(key);
+    });
+  }
   const icon = key =&gt; presets[key] ? &#x27;&lt;span class=&quot;gb-preset-icon&quot;&gt;&#x27;+icon(presets[key][1])+icon(presets[key][2])+&#x27;&lt;/span&gt;&#x27;
     : apps[key] ? &#x27;&lt;img class=&quot;gb-icon&quot; alt=&quot;&quot; src=&quot;&#x27;+apps[key][1]+&#x27;&quot;&gt;&#x27;
+    : seatKeys.includes(key)||key===&#x27;glass&#x27; ? nativeFunctionIcon(key)
     : key === &#x27;battery&#x27; ? glyph(&#x27;battery-medium&#x27;,&#x27;▱&#x27;)
     : key === &#x27;engine&#x27; ? glyph(&#x27;gauge&#x27;,&#x27;◴&#x27;)
     : key === &#x27;cabin&#x27; ? glyph(&#x27;thermometer&#x27;,&#x27;°&#x27;)
@@ -2653,8 +2718,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
       if(key in widgetLabels) return meter(key,state.widgetFields[key],state.widgetStyles[key],state.engineFill);
       if(seatKeys.includes(key)) {
         const level=seatLevels[key]||0;
-        return shortcut(label(key),&#x27;launch:&#x27;+key,icon(key)+
-          &#x27;&lt;span class=&quot;gb-seat-badge&quot; data-seat-level&#x27;+(level?&#x27;&#x27;:&#x27; hidden&#x27;)+&#x27;&gt;&#x27;+level+&#x27;&lt;/span&gt;&#x27;,&#x27;gb-seat-shortcut&#x27;)
+        return shortcut(label(key),&#x27;launch:&#x27;+key,icon(key),&#x27;gb-seat-shortcut&#x27;)
           .replace(&#x27; aria-label=&#x27;, &#x27; aria-description=&quot;Ступень &#x27;+level+&#x27;&quot; aria-label=&#x27;);
       }
       return shortcut(label(key),&#x27;launch:&#x27;+key,icon(key));
@@ -2965,7 +3029,8 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     if(grid &amp;&amp; folder) {
       const size=folder.tileSize ?? 1;
       const columns=folder.columns ?? 3;
-      pop.style.width=(32+columns*(96+size*16)+(columns-1)*6)*2/3+&#x27;px&#x27;;
+      const tileWidth=folder.items.some(key=&gt;vehicleKeys.includes(key))?112:96;
+      pop.style.width=(32+columns*(tileWidth+size*16)+(columns-1)*6)*2/3+&#x27;px&#x27;;
       pop.style.setProperty(&#x27;--folder-columns&#x27;,columns);
       pop.style.setProperty(&#x27;--folder-tile-height&#x27;,(80+size*16)*2/3+&#x27;px&#x27;);
       pop.style.setProperty(&#x27;--folder-icon-size&#x27;,(32+size*8)*2/3+&#x27;px&#x27;);
@@ -3358,8 +3423,9 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
       const auto=[&#x27;nav&#x27;,&#x27;gallery&#x27;,&#x27;view&#x27;,&#x27;sound&#x27;].filter(key=&gt;!folder.items.includes(key)&amp;&amp;!state.excluded.includes(key)).slice(0,state.limit);
       const items=folder.items.flatMap(key=&gt;key===&#x27;recent&#x27;?auto:[key]);
       showPopup(button,folder.name,items.length?&#x27;&lt;div class=&quot;gb-pop-items&quot;&gt;&#x27;+items.map(key=&gt;
-        &#x27;&lt;button type=&quot;button&quot; data-action=&quot;launch:&#x27;+key+&#x27;&quot;&gt;&#x27;+icon(key)+&#x27;&lt;span class=&quot;gb-folder-caption&quot;&gt;&#x27;+escape(label(key))+&#x27;&lt;/span&gt;&#x27;+
-        (seatKeys.includes(key)?&#x27; &lt;span data-seat-level&gt;· &#x27;+(seatLevels[key]||&#x27;Выкл&#x27;)+&#x27;&lt;/span&gt;&#x27;:&#x27;&#x27;)+&#x27;&lt;/button&gt;&#x27;).join(&#x27;&#x27;)+&#x27;&lt;/div&gt;&#x27;:
+        &#x27;&lt;button type=&quot;button&quot; class=&quot;&#x27;+(vehicleKeys.includes(key)?&#x27;gb-function-tile&#x27;:&#x27;&#x27;)+&#x27;&quot; data-action=&quot;launch:&#x27;+key+&#x27;&quot; aria-label=&quot;&#x27;+escape(label(key))+&#x27;&quot;&gt;&#x27;+icon(key)+
+        &#x27;&lt;span class=&quot;gb-folder-copy&quot;&gt;&lt;span class=&quot;gb-folder-caption&quot;&gt;&#x27;+escape(label(key))+&#x27;&lt;/span&gt;&#x27;+
+        (vehicleKeys.includes(key)?&#x27;&lt;span class=&quot;gb-folder-state&quot; data-native-state&gt;&#x27;+nativeStateLabel(key)+&#x27;&lt;/span&gt;&#x27;:&#x27;&#x27;)+&#x27;&lt;/span&gt;&lt;/button&gt;&#x27;).join(&#x27;&#x27;)+&#x27;&lt;/div&gt;&#x27;:
         &#x27;&lt;small&gt;В папке пока нет ярлыков&lt;/small&gt;&#x27;,folder.mode===1,false,false,folder);
       return;
     }
@@ -3465,7 +3531,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
       return;
     }
     if(action===&#x27;launch&#x27;&amp;&amp;id===&#x27;glass&#x27;){
-      demo.rearHeat=!demo.rearHeat;updateServices();return;
+      demo.rearHeat=!demo.rearHeat;updateNativeFunction(&#x27;glass&#x27;);updateServices();return;
     }
     closePopup();
     switch(action) {
@@ -3653,15 +3719,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   function advanceSeat(id) {
     const level=((seatLevels[id]||0)+(state.seatHighestFirst?3:1))%4;
     seatLevels[id]=level;
-    const shortcut=bar.querySelector(&#x27;[data-action=&quot;launch:&#x27;+id+&#x27;&quot;]&#x27;);
-    if(shortcut) {
-      const badge=shortcut.querySelector(&#x27;[data-seat-level]&#x27;);
-      badge.textContent=level;
-      badge.hidden=level===0;
-      shortcut.setAttribute(&#x27;aria-description&#x27;,&#x27;Ступень &#x27;+level);
-    }
-    const inFolder=pop.querySelector(&#x27;[data-action=&quot;launch:&#x27;+id+&#x27;&quot;] [data-seat-level]&#x27;);
-    if(inFolder)inFolder.textContent=&#x27;· &#x27;+(level||&#x27;Выкл&#x27;);
+    updateNativeFunction(id);
     updateServices();
   }
   function updateRpm() {
