@@ -2874,7 +2874,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
       &#x27;&lt;h3&gt;Управление службой из GalaxyBar&lt;/h3&gt;&lt;p&gt;Для включения службы из приложения нужен WRITE_SECURE_SETTINGS. Если прошивка позволяет выдать это право через ADB, выполните команду на компьютере с подключённым ГУ.&lt;/p&gt;&#x27;+
       command(&#x27;adb shell pm grant ru.galaxybar android.permission.WRITE_SECURE_SETTINGS&#x27;)+
       &#x27;&lt;h3&gt;Данные автомобиля&lt;/h3&gt;&lt;p&gt;В «Диагностике» нажмите «Попробовать запросить разрешение у Android». Если диалог больше не появляется, проверьте «Настройки Android → Приложения → GalaxyBar → Разрешения».&lt;/p&gt;&#x27;+
-      &#x27;&lt;h3&gt;Штатная верхняя строка&lt;/h3&gt;&lt;p&gt;INTERNAL_SYSTEM_WINDOW и STATUS_BAR_SERVICE выдаёт прошивка. Состояние прав можно проверить по строкам granted=true и granted=false в выводе:&lt;/p&gt;&#x27;+
+      &#x27;&lt;h3&gt;Штатная верхняя строка&lt;/h3&gt;&lt;p&gt;INTERNAL_SYSTEM_WINDOW и STATUS_BAR_SERVICE выдаёт прошивка. В выводе команды найдите строки granted=true и granted=false.&lt;/p&gt;&#x27;+
       command(&#x27;adb shell dumpsys package ru.galaxybar&#x27;)+&#x27;&lt;/div&gt;&#x27;);
   }
   const diagnosticReportPreview = () =&gt; &#x27;&lt;textarea class=&quot;gb-diagnostics-report&quot; readonly aria-label=&quot;Текст отчёта&quot;&gt;&#x27;+
