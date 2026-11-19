@@ -2331,6 +2331,10 @@ html&gt;body{padding:0}&lt;/style&gt;
 #galaxybar-app-demo .gb-diagnostics p {margin:0 0 6px;overflow-wrap:anywhere}
 #galaxybar-app-demo .gb-diagnostics .gb-diagnostic-status {background:var(--gb-card);border-left:3px solid var(--gb-accent);border-radius:6px;padding:9px 12px;margin-bottom:10px;line-height:1.35}
 #galaxybar-app-demo .gb-diagnostic-status small {display:block;margin-bottom:3px}
+#galaxybar-app-demo .gb-diagnostic-warning {padding:10px 12px;margin:0 0 12px;background:#392e22;border-left:3px solid #ffcd77;border-radius:6px}
+#galaxybar-app-demo[data-theme=&quot;light&quot;] .gb-diagnostic-warning {background:#fff3d9;border-left-color:#805714}
+#galaxybar-app-demo .gb-diagnostic-warning strong {display:block;margin-bottom:6px}
+#galaxybar-app-demo .gb-diagnostic-warning button {width:100%;margin-top:6px}
 #galaxybar-app-demo .gb-diagnostic-label {color:var(--gb-muted)}
 #galaxybar-app-demo .gb-diagnostics h3 {margin-top:12px}
 #galaxybar-app-demo .gb-diagnostics .gb-actions {margin-top:10px}
@@ -2482,7 +2486,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     massage2:&#x27;Массаж пассажира&#x27;,glass:&#x27;Обогрев заднего стекла и зеркал&#x27;,sounds:&#x27;Внешние звуки&#x27;,night:&#x27;Ночной режим&#x27;,battery:&#x27;Виджет батареи&#x27;,engine:&#x27;Виджет ДВС&#x27;,cabin:&#x27;Виджет салона&#x27;,recent:&#x27;Последние приложения&#x27;};
   const appearance = {left:220,center:36,height:44,round:2,style:0,reserve:false,hide:true};
   const state = {
-    section:0, enabled:true, limit:3,
+    section:0, enabled:true, limit:3, diagnosticSpeedGranted:false,
     experimental:globalThis.openai?.widgetState?.privateContent?.experimental===true,nightOrder:4,
     nightOptions:{brightness:80,horizon:false,fullscreen:true,hideStatusBar:false,hideGalaxyBar:true,speed:true,engine:true,battery:true,fuel:true,temperature:true,time:true,
       ...globalThis.openai?.widgetState?.privateContent?.nightOptions},
@@ -2821,16 +2825,16 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     [&#x27;Служба автосдвига&#x27;,autoShiftServiceStatus],
     [&#x27;WRITE_SECURE_SETTINGS&#x27;,secureSettingsStatus]
   ];
-  const firmwareDiagnostics = [
+  const firmwareDiagnostics = () =&gt; [
     [&#x27;GalaxyBar&#x27;,&#x27;1.6&#x27;],
     [&#x27;Flyme Auto&#x27;,&#x27;1.10.0-ota4 (приложение «Автомобиль»)&#x27;],
     [&#x27;Сборка ГУ&#x27;,&#x27;FlymeAuto-1.10.0-ota4&#x27;],
     [&#x27;Android&#x27;,&#x27;11 (API 30)&#x27;],
     [&#x27;CAR_ENERGY&#x27;,&#x27;выдано&#x27;],
-    [&#x27;CAR_SPEED&#x27;,&#x27;не выдано&#x27;]
+    [&#x27;CAR_SPEED&#x27;,state.diagnosticSpeedGranted?&#x27;выдано&#x27;:&#x27;не выдано&#x27;]
   ];
   const diagnosticReport = () =&gt; &#x27;GalaxyBar 1.6 · Диагностика\nДемонстрационные данные\n\n&#x27;+
-    firmwareDiagnostics.map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+
+    firmwareDiagnostics().map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+
     &#x27;\n\nSystemUI · 11\nПлагин Flyme SystemUI · 1.10.0-ota4\n&#x27;+
     panelDiagnostics.map(row=&gt;row.join(&#x27; · &#x27;)).join(&#x27;\n&#x27;)+&#x27;\n&#x27;+
     &#x27;Состояние строки · &#x27;+panelStatus+&#x27;\n&#x27;+
@@ -2845,9 +2849,15 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   function diagnostics() {
     const rows = entries =&gt; entries.map(([name,value])=&gt;
       &#x27;&lt;p&gt;&lt;span class=&quot;gb-diagnostic-label&quot;&gt;&#x27;+escape(name)+&#x27;&lt;/span&gt; · &#x27;+escape(value)+&#x27;&lt;/p&gt;&#x27;).join(&#x27;&#x27;);
+    const warning=&#x27;&lt;div class=&quot;gb-diagnostic-warning&quot;&gt;&lt;strong&gt;Не хватает разрешений&lt;/strong&gt;&#x27;+
+      &#x27;&lt;p&gt;INTERNAL_SYSTEM_WINDOW, STATUS_BAR_SERVICE&#x27;+(state.diagnosticSpeedGranted?&#x27;&#x27;:&#x27;, CAR_SPEED&#x27;)+&#x27;&lt;/p&gt;&#x27;+
+      &#x27;&lt;p&gt;&#x27;+(state.diagnosticSpeedGranted?&#x27;На этой прошивке эти разрешения недоступны для запроса через Android.&#x27;:
+        &#x27;Android может запросить часть разрешений. Остальные определяет прошивка.&#x27;)+&#x27;&lt;/p&gt;&#x27;+
+      control(&#x27;Попробовать запросить разрешение у Android&#x27;,&#x27;requestDiagnosticPermission&#x27;,true)+ &#x27;&lt;/div&gt;&#x27;;
     return &#x27;&lt;section class=&quot;gb-diagnostics&quot; aria-label=&quot;Состояние ГУ и разрешения&quot;&gt;&#x27;+
+      (state.diagnosticSpeedGranted?warning.replace(&#x27;&lt;button &#x27;,&#x27;&lt;button disabled &#x27;):warning)+
       &#x27;&lt;p class=&quot;gb-diagnostic-status&quot;&gt;&lt;small&gt;Состояние строки&lt;/small&gt;&#x27;+escape(panelStatus)+&#x27;&lt;/p&gt;&#x27;+
-      rows(panelDiagnostics)+rows(autoShiftDiagnostics)+&#x27;&lt;h3&gt;ГУ и приложение&lt;/h3&gt;&#x27;+rows(firmwareDiagnostics)+
+      rows(panelDiagnostics)+rows(autoShiftDiagnostics)+&#x27;&lt;h3&gt;ГУ и приложение&lt;/h3&gt;&#x27;+rows(firmwareDiagnostics())+
       &#x27;&lt;div class=&quot;gb-actions&quot;&gt;&#x27;+tile(&#x27;Сохранить TXT&#x27;,&#x27;saveDiagnostics&#x27;,glyph(&#x27;download&#x27;,&#x27;⇩&#x27;))+
       tile(&#x27;Поделиться&#x27;,&#x27;shareDiagnostics&#x27;,glyph(&#x27;message-square&#x27;,&#x27;▢&#x27;))+&#x27;&lt;/div&gt;&lt;/section&gt;&#x27;;
   }
@@ -3623,6 +3633,10 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
         updateDemo.skippedVersion=demoUpdate.version;dialog.close();applyUpdateScenario(true);
         act(&#x27;Релиз &#x27;+demoUpdate.version+&#x27; пропущен. Следующая версия будет предложена.&#x27;);return;
       case &#x27;updateSource&#x27;: act(id===&#x27;telegram&#x27;?&#x27;В приложении откроется релиз в @GalaxyAppsRU&#x27;:&#x27;В приложении откроется SnickPro Store&#x27;);return;
+      case &#x27;requestDiagnosticPermission&#x27;:
+        if(!state.diagnosticSpeedGranted)showDialog(&#x27;Доступ к скорости автомобиля&#x27;,
+          &#x27;&lt;p&gt;GalaxyBar запрашивает доступ к данным скорости автомобиля.&lt;/p&gt;&#x27;,
+          ()=&gt;{state.diagnosticSpeedGranted=true;},&#x27;Разрешить&#x27;);return;
       case &#x27;saveDiagnostics&#x27;: showDialog(&#x27;Сохранить диагностику&#x27;,
         &#x27;&lt;p&gt;GalaxyBar-diagnostics-demo.txt&lt;/p&gt;&#x27;+diagnosticReportPreview());return;
       case &#x27;shareDiagnostics&#x27;: showDialog(&#x27;Поделиться диагностикой&#x27;,
@@ -3886,7 +3900,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   [0,72,1540,18,true],[4,145,2900,28,true],[8,180,3500,36,true],
   [12,105,2200,22,true],[16,45,900,10,true],[18,20,0,-12,false],
   [22,95,0,24,false],[26,155,0,36,false],[30,65,0,-30,false],
-  [34,0,0,0,false],[38,35,1100,12,true],[42,72,1540,18,true]
+  [34,0,0,0.3,false],[35.5,0,0,0.4,false],[38,35,1100,12,true],[42,72,1540,18,true]
  ];
  function sample(){
   if(!state.live||reduced)return {speed:state.speed,rpm:state.scenario===&#x27;Электро&#x27;?0:state.rpm,power:state.powerAvailable?state.power:null};
@@ -3905,7 +3919,9 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
  function render(){
   layout();
   const reading=sample(),speed=Math.round(clamp(reading.speed,180)),right=rightReading(reading);
-  const value=right.value==null?&#x27;—&#x27;:String(Math.sign(right.value)*Math.round(Math.abs(right.value)));
+  const decimals=right.mode===&#x27;power&#x27;&amp;&amp;reading.speed===0?1:0;
+  const factor=decimals===1?10:1;
+  const value=right.value==null?&#x27;—&#x27;:(Math.sign(right.value)*Math.round(Math.abs(right.value)*factor)/factor).toFixed(decimals).replace(&#x27;.&#x27;,&#x27;,&#x27;);
   const brightness=Math.max(10,Math.min(100,Math.round((Number(options.brightness)||80)/10)*10));
   root.style.setProperty(&#x27;--nc-brightness&#x27;,String(brightness/100));
   root.dataset.horizon=String(options.horizon===true);
@@ -3930,7 +3946,7 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
   }});
   tweak.addSlider(state,&#x27;speed&#x27;,{label:&#x27;Скорость&#x27;,min:0,max:180,step:1,unit:&#x27;км/ч&#x27;});
   tweak.addSlider(state,&#x27;rpm&#x27;,{label:&#x27;Обороты ДВС&#x27;,min:0,max:3500,step:50,unit:&#x27;об/мин&#x27;});
-  tweak.addSlider(state,&#x27;power&#x27;,{label:&#x27;Тестовая мощность&#x27;,min:-36,max:36,step:1,unit:&#x27;кВт&#x27;});
+  tweak.addSlider(state,&#x27;power&#x27;,{label:&#x27;Тестовая мощность&#x27;,min:-36,max:36,step:0.1,unit:&#x27;кВт&#x27;});
   tweak.addSelect(state,&#x27;scenario&#x27;,{label:&#x27;Сценарий&#x27;,options:[&#x27;Авто&#x27;,&#x27;ДВС&#x27;,&#x27;Электро&#x27;]});
   tweak.addToggle(state,&#x27;live&#x27;,{label:&#x27;Живые показания&#x27;});
   tweak.addToggle(state,&#x27;powerAvailable&#x27;,{label:&#x27;Тестовые данные мощности доступны&#x27;});
