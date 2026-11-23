@@ -2263,7 +2263,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 
 #galaxybar-app-demo .gb-version {font-size:11px;white-space:nowrap}
 #galaxybar-app-demo .gb-shield {align-self:stretch}
-#galaxybar-app-demo :is(.gb-shortcuts,.gb-widget-preview) .gb-meter {display:inline-flex;align-items:center;flex:none;gap:4px;min-height:24px;height:max(calc(var(--gb-icon-height) * .82),calc(var(--meter-number-size,12px) + 4px));padding:0 7px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;background:linear-gradient(90deg,var(--meter-fill) var(--fill),var(--meter-base) var(--fill))}
+#galaxybar-app-demo :is(.gb-shortcuts,.gb-widget-preview) .gb-meter {display:inline-flex;align-items:center;flex:none;gap:4px;min-height:24px;height:max(calc(var(--gb-icon-height) * .82),calc(var(--meter-number-size,12px) + 4px));padding:0 6px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;background:linear-gradient(90deg,var(--meter-fill) var(--fill),var(--meter-base) var(--fill))}
 #galaxybar-app-demo .gb-shortcuts .gb-meter {margin-inline:5.33px 1.33px}
 #galaxybar-app-demo .gb-meter {--meter-base:#2c353d;--meter-fill:#265c42}
 #galaxybar-app-demo :is(.gb-shortcuts,.gb-widget-preview) .gb-meter[data-fill=&quot;false&quot;] {background:var(--meter-base)}
@@ -2797,11 +2797,11 @@ html[data-visualize-standalone] #galaxybar-app-demo &gt; .gb-layout {block-size:
     const values=engine
       ? [reading(isAtlas()&amp;&amp;!preview?null:demo.rpm,appearance.rpmUnit===&#x27;rpm&#x27;?&#x27;RPM&#x27;:&#x27;об/мин&#x27;,&#x27; data-rpm-number&#x27;),reading(isAtlas()&amp;&amp;!preview?null:demo.coolant,&#x27;°C&#x27;),
         reading(fuelRange(),&#x27;км&#x27;),reading(Math.round(fuelLiters()),&#x27;л&#x27;)]
-      : cabin ? [reading(decimal.format(demo.cabinTemp),&#x27;°C&#x27;),glyph(&#x27;droplet&#x27;,&#x27;💧&#x27;)+reading(demo.humidity,&#x27;%&#x27;)]
+      : cabin ? [icon(&#x27;cabin&#x27;)+reading(decimal.format(demo.cabinTemp),&#x27;°C&#x27;),glyph(&#x27;droplet&#x27;,&#x27;💧&#x27;)+reading(demo.humidity,&#x27;%&#x27;)]
       : [reading(demo.charge,&#x27;%&#x27;),reading(demo.batteryTemp.replace(/\s*°C$/,&#x27;&#x27;),&#x27;°C&#x27;),glyph(&#x27;zap&#x27;,&#x27;ϟ&#x27;)+reading(demo.evRange,&#x27;км&#x27;),chargeArrow(demo.batteryPower)+reading(powerMagnitude(demo.batteryPower),&#x27;кВт&#x27;,&#x27; data-battery-power&#x27;)];
     const content=order.filter(i=&gt;fields[i]).map(i=&gt;&#x27;&lt;span class=&quot;gb-meter-part&quot; data-meter-field=&quot;&#x27;+i+&#x27;&quot;&gt;&#x27;+
-      (!engine&amp;&amp;!cabin&amp;&amp;i===0?icon(key):&#x27;&#x27;)+values[i]+&#x27;&lt;/span&gt;&#x27;).join(&#x27;&lt;span aria-hidden=&quot;true&quot;&gt;·&lt;/span&gt;&#x27;);
-    const leading=engine||cabin?icon(key):&#x27;&#x27;;
+      values[i]+&#x27;&lt;/span&gt;&#x27;).join(&#x27;&lt;span aria-hidden=&quot;true&quot;&gt;·&lt;/span&gt;&#x27;);
+    const leading=cabin?&#x27;&#x27;:icon(key);
     const tag=preview?&#x27;span&#x27;:&#x27;button&#x27;;
     const button=preview?&#x27;&#x27;:&#x27; type=&quot;button&quot; aria-label=&quot;&#x27;+(cabin?&#x27;Салон&#x27;:engine?&#x27;Двигатель&#x27;:&#x27;Тяговая батарея&#x27;)+&#x27;&quot; data-action=&quot;&#x27;+key+&#x27;&quot;&#x27;;
     const cabinFill = (Math.max(-30,Math.min(30,demo.cabinTemp))+30)*100/60;
