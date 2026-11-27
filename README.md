@@ -23,7 +23,7 @@
 <td align="center" width="50%">
 <img src="assets/galaxysplit-linked.png" alt="GalaxySplit" width="96" height="96">
 <h2>GalaxySplit</h2>
-<p>Два приложения на одном экране. Сохранённые пресеты и удобное управление.</p>
+<p>Два или три приложения на одном экране. Сохранённые пресеты и удобное управление.</p>
 <p><a href="galaxysplit/README.md"><strong>О приложении</strong></a> · <a href="https://backer13.github.io/GalaxyApps-updates/galaxysplit/">Интерактивный макет</a></p>
 </td>
 </tr>
