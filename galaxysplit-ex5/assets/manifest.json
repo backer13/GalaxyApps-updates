@@ -1,9 +1,9 @@
 {
-  "version": "0.01",
+  "version": "0.02",
   "package": "ru.galaxysplit.ex5test",
   "apk": {
-    "file": "GalaxySplit-EX5-0.01-Two-Windows-Test.apk",
-    "bytes": 122836,
-    "sha256": "d9feb2e8950273a7bb90b013a58c2f0bffb7c19df8272f694a2e1d6062a3649c"
+    "file": "GalaxySplit-EX5-0.02-Full-Interface-Preview.apk",
+    "bytes": 895333,
+    "sha256": "ff5ee811f4368adaac4bfc8bc2f7b585fa36360959b64e31a576c3cf09d28f66"
   }
 }
