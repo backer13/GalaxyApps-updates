@@ -1,3 +1,5 @@
 # Keep exported standalone demos byte-for-byte, including their sandbox/CSP wrapper.
 /galaxybar/index.html -text
 /galaxysplit/index.html -text
+
+/galaxysplit-ex5/** -text

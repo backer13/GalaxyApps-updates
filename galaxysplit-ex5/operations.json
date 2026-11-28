@@ -1,0 +1,20 @@
+{
+  "sdk": {"command":"getprop ro.build.version.sdk"},
+  "model": {"command":"getprop ro.product.model"},
+  "user": {"command":"am get-current-user"},
+  "install": {"command":"pm install -r --user {user} /data/local/tmp/galaxysplit-ex5-test.apk","parameters":{"user":"^[0-9]{1,4}$"}},
+  "launch": {"command":"am start --user {user} -n ru.galaxysplit.ex5test/.TestActivity","parameters":{"user":"^[0-9]{1,4}$"}},
+  "key": {"command":"run-as ru.galaxysplit.ex5test --user {user} cat files/helper-token","parameters":{"user":"^[0-9]{1,4}$"}},
+  "uid": {"command":"pm list packages -U --user {user} ru.galaxysplit.ex5test","parameters":{"user":"^[0-9]{1,4}$"}},
+  "path": {"command":"pm path --user {user} ru.galaxysplit.ex5test","parameters":{"user":"^[0-9]{1,4}$"}},
+  "shutdown": {"command":"CLASSPATH={path} app_process /system/bin ru.galaxysplit.ex5test.helper.ControlCli shutdown 2>/dev/null","parameters":{"path":"^/data/app/[A-Za-z0-9_=/+.~-]+\\.apk$"}},
+  "start": {"command":"CLASSPATH={path} nohup app_process /system/bin ru.galaxysplit.ex5test.helper.Helper {uid} {user} {key} > /data/local/tmp/galaxysplit-ex5-test.log 2>&1 < /dev/null &","parameters":{"path":"^/data/app/[A-Za-z0-9_=/+.~-]+\\.apk$","uid":"^[0-9]{5,9}$","user":"^[0-9]{1,4}$","key":"^[a-f0-9]{64}$"}},
+  "status": {"command":"CLASSPATH={path} app_process /system/bin ru.galaxysplit.ex5test.helper.ControlCli status","parameters":{"path":"^/data/app/[A-Za-z0-9_=/+.~-]+\\.apk$"}},
+  "stop": {"command":"CLASSPATH={path} app_process /system/bin ru.galaxysplit.ex5test.helper.ControlCli stop","parameters":{"path":"^/data/app/[A-Za-z0-9_=/+.~-]+\\.apk$"}},
+  "helperLog": {"command":"cat /data/local/tmp/galaxysplit-ex5-test.log"},
+  "tasks": {"command":"dumpsys activity activities"},
+  "windows": {"command":"dumpsys window windows"},
+  "firmware": {"command":"getprop ro.build.fingerprint"},
+  "package": {"command":"dumpsys package ru.galaxysplit.ex5test"},
+  "screenshot": {"command":"screencap -p /sdcard/Download/galaxysplit-ex5-web.png"}
+}

@@ -4,3 +4,7 @@
 *.jks
 *.keystore
 .env*
+
+# Public EX5 test installer APK and local bridge kits, authorized 2026-11-28.
+!/galaxysplit-ex5/assets/*.apk
+!/galaxysplit-ex5/downloads/*.zip
